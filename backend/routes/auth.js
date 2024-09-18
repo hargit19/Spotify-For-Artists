@@ -4,9 +4,10 @@ const userModel = require('../models/user');
 // const generateToken = require('../utils/generateToken');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const cors = require('cors');
 
 
-router.post("/register" , async (req,res) => {
+router.post("/register" , cors() ,  async (req,res) => {
     let user = await userModel.findOne({email : req.body.email});
     if(user){
         res.status(403).json({error : "user already exists"});
@@ -33,7 +34,7 @@ router.post("/register" , async (req,res) => {
 })
 
 
-router.post("/login", async (req, res) => {
+router.post("/login", cors() , async (req, res) => {
     try {
         let user = await userModel.findOne({ email: req.body.email });
         if (!user) {
