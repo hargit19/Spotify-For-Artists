@@ -12,6 +12,8 @@ const passport = require('passport');
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 
+app.options('*', cors()); // Allows all preflight requests
+
 // app.use(cors({
 //   origin: function (origin, callback) {
 //     // allow requests with no origin (like mobile apps or curl requests)
@@ -25,7 +27,10 @@ app.use(express.urlencoded({extended : true}));
 //   credentials: true, // If you are handling cookies or authentication
 // }));
 
-app.use(cors({ origin: '*' }));
+app.use(cors({
+  origin: 'https://spotify-for-artists-frontend.vercel.app',
+  credentials: true, // This allows credentials like cookies or headers to be sent with the request
+}));
 
 const User = require('./models/user');
 
