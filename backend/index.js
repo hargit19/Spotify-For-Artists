@@ -7,24 +7,25 @@ const JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
 const passport = require('passport');
 
-const allowedOrigins = ['https://spotify-for-artists-frontend.vercel.app'];
+// const allowedOrigins = ['https://spotify-for-artists-frontend.vercel.app'];
 
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 
-app.use(cors({
-  origin: function (origin, callback) {
-    // allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-  credentials: true, // If you are handling cookies or authentication
-}));
+// app.use(cors({
+//   origin: function (origin, callback) {
+//     // allow requests with no origin (like mobile apps or curl requests)
+//     if (!origin) return callback(null, true);
+//     if (allowedOrigins.indexOf(origin) === -1) {
+//       const msg = 'The CORS policy for this site does not allow access from the specified origin.';
+//       return callback(new Error(msg), false);
+//     }
+//     return callback(null, true);
+//   },
+//   credentials: true, // If you are handling cookies or authentication
+// }));
 
+app.use(cors({ origin: '*' }));
 
 const User = require('./models/user');
 
@@ -37,9 +38,6 @@ mongoose.connect("mongodb+srv://hardikadvani1910:" + process.env.MONGODB_PASS + 
 }).catch( (err) => {
     console.log("could not connect to db");
 })
-
-
-
 
 var opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
