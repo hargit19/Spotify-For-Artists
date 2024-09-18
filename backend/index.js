@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 
 app.use(cors({
-    origin: '',// Frontend URL in development
+    origin: 'https://spotify-for-artists-frontend.vercel.app',// Frontend URL in development
     methods: ["POST" , "GET"], 
     credentials: true,
 }));
