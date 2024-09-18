@@ -11,5 +11,10 @@
         "src": "/(.*)",
         "dest": "/"
       }
-    ]
+    ],
+    "functions": {
+    "*.js": {
+      "maxDuration": 60 // Set duration in seconds (up to 60 seconds)
+    }
+  }
   }
