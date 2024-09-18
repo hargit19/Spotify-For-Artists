@@ -27,10 +27,20 @@ app.options('*', cors()); // Allows all preflight requests
 //   credentials: true, // If you are handling cookies or authentication
 // }));
 
+const allowedOrigins = ['https://spotify-for-artists-frontend.vercel.app'];
+
 app.use(cors({
-  origin: 'https://spotify-for-artists-frontend.vercel.app',
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   credentials: true, // This allows credentials like cookies or headers to be sent with the request
 }));
+
 
 const User = require('./models/user');
 
@@ -69,6 +79,4 @@ app.use("/auth" , authRoute);
 app.use("/song", songRoute);
 app.use("/playlist" , playlistRoute);
 
-app.listen(8080,()=> {
-    console.log("port is running at 8080");
-})
+module.exports = app; // Vercel will handle serverless functions automatically
