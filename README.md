@@ -64,3 +64,7 @@ A web application designed to empower artists to manage their music, connect wit
 
    ```bash
    npm start
+
+ If you like my project, do give it a ⭐!
+
+
