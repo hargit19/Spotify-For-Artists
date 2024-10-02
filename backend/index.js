@@ -79,4 +79,8 @@ app.use("/auth" , authRoute);
 app.use("/song", songRoute);
 app.use("/playlist" , playlistRoute);
 
-module.exports = app; // Vercel will handle serverless functions automatically
+app.listen(3000 , ()=> {
+    console.log("port is running on port 3000");
+})
+
+module.exports = app; 
